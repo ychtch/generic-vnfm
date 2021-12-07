@@ -37,10 +37,8 @@ prepare_machine_generic () {
     cp /usr/share/zoneinfo/$TIMEZONE /etc/localtime
     mkdir /opt/openbaton
     #Installation of pip
-    wget http://192.168.1.240/openbaton/get-pip.py
-    update-alternatives --install /usr/bin/python python /usr/bin/python3 0
+    wget https://bootstrap.pypa.io/get-pip.py
     python get-pip.py
-    pip install --upgrade testresources
     pip install --upgrade setuptools
 }
 
@@ -113,10 +111,6 @@ install_zabbix_on_centos () {
 #############
 
 configure_ems () {
-    wget http://192.168.1.240/openbaton/ems.py -O /usr/local/lib/python3.9/dist-packages/ems/ems.py
-    wget http://192.168.1.240/openbaton/receiver.py -O /usr/local/lib/python3.9/dist-packages/ems/receiver.py
-    mkdir -p /opt/openbaton/scripts
-    wget http://192.168.1.240/openbaton/scripts --directory-prefix=/opt/openbaton/scripts/ -r -np -nd --include openbaton/scripts -A sh,py
     mkdir -p /etc/openbaton
     echo [ems] > ${EMS_PROPERTIES_FILE}
     echo broker_ip=$BROKER_IP >> ${EMS_PROPERTIES_FILE}
